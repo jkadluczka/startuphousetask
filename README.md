@@ -1,35 +1,8 @@
 # JS Recruitment Task
 
-## Description
+## Approach
 
-We would like you to create an application that will display list of news fetched from The Guardian. You should use their API, which can be found here: [https://open-platform.theguardian.com/](https://open-platform.theguardian.com/)
+First i tachled fetching data. I used fetch to get the data from API. Then, when it was working I took care of pagination, then section and lastly search bar. Each one of them was done similarly by setting up event listening and changing corelating variables. After every change 'rendering' method is triggered so it updates the list on the screen. Saving "read later" articles I've used local storage. When data is supposed to be added it gets the array from local storage (if it's exist), then pushes the new element and finally overwrites old one. If the new entry is not unique methow won't allow the push. Removing is done in analog way. Finally I had to tweak 'rendering' methods. I broke the process on two methods so it is more clear how it goes. It's simple mapping of array of elements to corresponding elements. I switched way of handling clicks to '.addEventListener' in both cases. at the end of both methods innerHtml of containers are cleared and then, using forEach I append all the children I get from mapping.
 
-Goal of this task is to check your JavaScript knowledge so please don't use any additional libraries, you can use `fetch` for http requests.
+I would gladly include tests but as you've stated I can't add external library and I can't solve issue with fetch not being read properly. I am used to testing React components with Jest but this unfortunatelly was beyond me. I'm hoping it won't cross me out of the recruitment process.
 
-We have provided sample html + css styling, so you can focus on writing JS code.
-
-## Requirements
-
-- Display list of news from last 30 days
-- Add pagination: 10 items per page
-- Add news filtering based on section selection from dropdown. You can restrict it only to: `sport`, `books`, `business`, `culture`
-- Add search functionality for filtering news content based on provided phrase
-- Each news list element should have following elements:
-  - Title
-  - Section name
-  - Date of publication
-  - Link to full article (open in new window)
-  - "Read Later" button
-- Clicking "Read later" button should add selected news to the "Read later" section on the right. Those elements should be stored somewhere and displayed even after refresh.
-- Each element from "read later" can be removed by clicking "delete" button
-- (Bonus) It would be beneficial if you would write some kind of tests, either unit or integration
-- (Bonus) If you will find time, please briefly describe your approach to solving this task.
-
-## Tools used
-
-In order to keep things simple we used only really small number of libs for this boilerplate:
-
-- [Parcel](https://en.parceljs.org) as a bundler
-- [Milligram](https://milligram.io/) and [Normalize](https://necolas.github.io/normalize.css/) for some simple styling
-- [Eslint](https://eslint.org/) and [Prettier](https://prettier.io/) for static code check
-- [PostCSS](https://postcss.org/) with [Autoprefixr](https://autoprefixer.github.io/) for css compatibility

@@ -10,6 +10,18 @@ export const getCorrectDateFormat = date => {
   return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
 };
 
+const handleAddReadLater = item => {
+  const list = localStorage.getItem('readLater');
+  const newList = list ? JSON.parse(list) : [];
+
+  if (newList.filter(element => element.id === item.id).length) return null;
+
+  newList.push(item);
+
+  localStorage.setItem('readLater', JSON.stringify(newList));
+  handleRenderingReadLater();
+};
+
 const handleRemoveReadLater = item => {
   const localStorageList = localStorage.getItem('readLater');
   const list = localStorageList ? JSON.parse(localStorageList) : [];
@@ -62,18 +74,6 @@ const handleRenderingReadLater = () => {
   parsedList.forEach(element => {
     document.getElementById('readLaterList').appendChild(element);
   });
-};
-
-const handleAddReadLater = item => {
-  const list = localStorage.getItem('readLater');
-  const newList = list ? JSON.parse(list) : [];
-
-  if (newList.filter(element => element.id === item.id).length) return null;
-
-  newList.push(item);
-
-  localStorage.setItem('readLater', JSON.stringify(newList));
-  handleRenderingReadLater();
 };
 
 const getNewsWindow = result => {
@@ -145,9 +145,6 @@ const handleFetchingNews = () => {
     });
 };
 
-handleFetchingNews();
-handleRenderingReadLater();
-
 document.getElementById('activePageSelect').onchange = e => {
   pageNumber = e.target.value;
   handleFetchingNews();
@@ -162,3 +159,6 @@ document.getElementById('newsContentSearch').oninput = e => {
   searchValue = e.target.value;
   handleFetchingNews();
 };
+
+handleFetchingNews();
+handleRenderingReadLater();
